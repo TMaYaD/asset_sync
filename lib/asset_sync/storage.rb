@@ -212,9 +212,15 @@ module AssetSync
     def upload_files
       # get a fresh list of remote files
       remote_files = ignore_existing_remote_files? ? [] : get_remote_files
+      log "local_files: #{local_files.to_s}"
+      log "ignored_files: #{ignored_files.to_s}"
+      log "remote_files: #{remote_files.to_s}"
+      log "always_upload_files: #{always_upload_files.to_s}"
       # fixes: https://github.com/rumblelabs/asset_sync/issues/19
       local_files_to_upload = local_files - ignored_files - remote_files + always_upload_files
+      log "local_files_to_upload(only fingerprinted): #{local_files_to_upload.to_s}"
       local_files_to_upload = (local_files_to_upload + get_non_fingerprinted(local_files_to_upload)).uniq
+      log "local_files_to_upload(with non-fingerprinted): #{local_files_to_upload.to_s}"
 
       # Upload new files
       local_files_to_upload.each do |f|
