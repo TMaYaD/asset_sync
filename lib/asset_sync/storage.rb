@@ -219,7 +219,7 @@ module AssetSync
       # fixes: https://github.com/rumblelabs/asset_sync/issues/19
       local_files_to_upload = local_files - ignored_files - remote_files + always_upload_files
       log "local_files_to_upload(fingerprinted): #{local_files_to_upload.to_s}"
-      log "local_files_to_upload(non-fingerprinted): #{get_non_fingerprinted(local_files_to_upload)).to_s}"
+      log "local_files_to_upload(non-fingerprinted): #{get_non_fingerprinted(local_files_to_upload).to_s}"
       local_files_to_upload = (local_files_to_upload + get_non_fingerprinted(local_files_to_upload)).uniq
       log "local_files_to_upload(all): #{local_files_to_upload.to_s}"
 
